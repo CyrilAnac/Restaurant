@@ -1,6 +1,5 @@
-from dialogs import Dialog,commands
-
 from sheetsImport import platsCarte,boissonsCarte
+from dialogs import Dialog,commands
 import time
 import random
 import colorama as cr
@@ -15,13 +14,11 @@ def afficherLaCarte():
         print(cat + " :")
         print("---------------")
         for plat in laCarte:
-            if (plat.categorie == cat
-                ):  #Si le plat appartient à la bonne catégorie, on l'affiche
-                print('-> ' + f"{cr.Fore.CYAN}" + plat.nom + '    ' +
-                      str(plat.prix) + '€')
-                print(f"{cr.Fore.MAGENTA}" + "\033[3m" + plat.composition)
+            if (plat.categorie == cat):  #Si le plat appartient a la bonne categorie, on l'affiche
+                print('-> ' + cr.Fore.CYAN + plat.nom + '    ' +
+                      str(plat.prix)+ '€')
+                print(cr.Fore.MAGENTA + "\033[3m" + plat.composition)
                 print()
-
 
 def afficherBoisson():
     for cat in boissonsCarte.categories:
@@ -32,9 +29,10 @@ def afficherBoisson():
             if (
                     boisson.categorie == cat
             ):  #Si la boisson appartient à la bonne catégorie, on l'affiche
-                print('-> ' + f"{cr.Fore.CYAN}" + boisson.nom + '    ' +
+            
+                print('-> ' + cr.Fore.CYAN + boisson.nom + '    ' +
                       str(boisson.prix) + '€')
-                print(f"{cr.Fore.MAGENTA}" + "\033[3m" + boisson.composition)
+                print(cr.Fore.MAGENTA + "\033[3m" + boisson.composition)
                 print()
 
 

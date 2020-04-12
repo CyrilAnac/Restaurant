@@ -1,6 +1,5 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-
 from classes import Boisson
  # Importation de la classe Plat
 
@@ -12,8 +11,6 @@ client = gspread.authorize(creds)
 # Find a workbook by name and open the first sheet
 # Make sure you use the right name here.
 sheet = client.open("Carte du restaurant").worksheet("Boissons")
-
-
 
 categories = ["ALCOOLS","SOFT","BOISSONS CHAUDES", "COCKTAIL APERITIF"]
 

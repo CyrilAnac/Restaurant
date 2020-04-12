@@ -1,6 +1,5 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-
 from classes import Plat  # Importation de la classe Plat
 
 # use creds to create a client to interact with the Google Drive API
