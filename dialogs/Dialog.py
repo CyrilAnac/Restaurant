@@ -1,4 +1,5 @@
 
+from dialogs import commands
 class Dialog:
   
 
@@ -32,11 +33,11 @@ class Dialog:
       except ValueError:
         print("(Tapez un nombre)")
 
-    ret =  self.listCommand[res-1].action
+    self.listCommand[res-1].action()
+    
     self.listCommand.clear()
     self.nbCmd = 0
-      
-    return ret
+    
 
     
 

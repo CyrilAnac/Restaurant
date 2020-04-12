@@ -1,4 +1,5 @@
-from dialogs import Dialog,commands
+from dialogs.commands import *
+from dialogs.Dialog import *
 
 from sheetsImport import platsCarte,boissonsCarte
 import time
@@ -62,18 +63,6 @@ def platPris(saisie):
             return plat
 
 
-# Verifie si la personne a reservé
-def verificationReservation(nomSaisie):
-    trouve = False
-
-    #boucle sur le tableau des personnes qui ont reservés
-    for nom in nomReserve:
-        if nom == nomSaisie:
-            trouve = True
-
-    return trouve
-
-
 def addition(listePlats):
     prixTotal = 0
 
@@ -88,11 +77,10 @@ def addition(listePlats):
 laCarte = []
 platsCarte.ajoutPlats(laCarte)
 #boissonsCarte.ajoutBoisson(laCarte)
-nomReserve = ["Anaclet", "Buso", "Guthrie"]
 nombreClient = random.randint(10, 40)
 NB_PLACES_MAX = 40
 platsCommandes = []
-dl = Dialog.Dialog()
+dl = Dialog()
 
 
 #BEGIIIN
@@ -109,26 +97,11 @@ print(" Bonjour et bienvenus au réstaurant de Cyril et Luna!\n\n")
 reserve = False
 print("Avez vous réservé ? : ")
 
-dl.addCmd(commands.oui)
-dl.addCmd(commands.non)
-reservation = dl.prt()
+dl.addCmd(reserveOui("oui"))
+dl.addCmd(reserveNon("non"))
+dl.addCmd(reserveAutrejour("Nous voudrions réserver pour un autre jour"))
+dl.prt()
 
-if reservation :
-    nomSaisie = input('A quel nom ? : ')
-    reserve = verificationReservation(nomSaisie)
-    if (reserve):
-        print('Très bien ' + nomSaisie + ' figure dans ma liste')
-        print("Je vous accompagne a votre table..")
-        time.sleep(3)
-    else:
-        print('Désolé ' + nomSaisie + ' n\'apparait pas dans ma liste')
-
-#Si il n'y a pas eu de reservation
-if (not reserve):
-    combien = input('Combien êtes vous ? : ')
-    # TODO: Verification si il y a de la place
-    print('D\'accord, il y a une table de ' + combien + ' personnes ici')
-    time.sleep(2)
 
 print("Voici la carte, je vous laisse réfléchir quelques instants.")
 time.sleep(3)
