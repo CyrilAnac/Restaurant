@@ -1,9 +1,5 @@
 
 class Boisson:
-  categorie = ""
-  nom = ""
-  composition = ""
-  prix = 0
    
 
   def __init__(self, categorie, nom, composition=[],prix=0):
