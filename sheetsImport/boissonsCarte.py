@@ -1,11 +1,12 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-from Boissons import * # Importation de la classe Plat
+from classes import Boisson
+ # Importation de la classe Plat
 
 # use creds to create a client to interact with the Google Drive API
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name('packages/client_secret.json', scope)
 client = gspread.authorize(creds)
 
 # Find a workbook by name and open the first sheet
@@ -25,6 +26,6 @@ def ajoutBoisson(carte) :
   list_cat = sheet.col_values(4)
 
   for i in range(2,len(list_nom)): 
-      boisson = Boisson(list_cat[i],list_nom[i],list_compo[i],list_prix[i])
+      boisson = Boisson.Boisson(list_cat[i],list_nom[i],list_compo[i],list_prix[i])
       if(boisson.nom != "" ) :
         carte.append(boisson)
