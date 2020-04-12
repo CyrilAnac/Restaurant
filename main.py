@@ -76,7 +76,7 @@ def addition(listePlats):
 #==============
 laCarte = []
 platsCarte.ajoutPlats(laCarte)
-#boissonsCarte.ajoutBoisson(laCarte)
+boissonsCarte.ajoutBoisson(laCarte)
 nombreClient = random.randint(10, 40)
 NB_PLACES_MAX = 40
 platsCommandes = []
@@ -93,19 +93,23 @@ print(" Bonjour et bienvenus au réstaurant de Cyril et Luna!\n\n")
 
 
 # Reservation
-#_________________________________________
-reserve = False
+#----------------------------------------
 print("Avez vous réservé ? : ")
-
 dl.addCmd(reserveOui("oui"))
 dl.addCmd(reserveNon("non"))
 dl.addCmd(reserveAutrejour("Nous voudrions réserver pour un autre jour"))
 dl.prt()
 
+# Aperitif
+#----------------------------------------
+print("Souhaitez vous un apéritif ?")
+rep = input()
+if rep == "oui":
+  afficherBoisson()
+
 
 print("Voici la carte, je vous laisse réfléchir quelques instants.")
 time.sleep(3)
-#afficherBoisson()
 afficherLaCarte()
 time.sleep(5)
 

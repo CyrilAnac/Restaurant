@@ -1,5 +1,5 @@
 
-from dialogs import Command
+from classes import Command
 import time
 
 
