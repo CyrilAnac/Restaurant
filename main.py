@@ -9,34 +9,6 @@ import colorama as cr
 cr.init(autoreset=True)
 
 
-# Permet l'affichage complet de la carte
-def afficherLaCarte():
-    for cat in platsCarte.categories:
-        print()
-        print(cat + " :")
-        print("---------------")
-        for plat in laCarte:
-            if (plat.categorie == cat
-                ):  #Si le plat appartient à la bonne catégorie, on l'affiche
-                print('-> ' + f"{cr.Fore.CYAN}" + plat.nom + '    ' +
-                      str(plat.prix) + '€')
-                print(f"{cr.Fore.MAGENTA}" + "\033[3m" + plat.composition)
-                print()
-
-
-def afficherBoisson():
-    for cat in boissonsCarte.categories:
-        print()
-        print(cat + " :")
-        print("---------------")
-        for boisson in laCarte:
-            if (
-                    boisson.categorie == cat
-            ):  #Si la boisson appartient à la bonne catégorie, on l'affiche
-                print('-> ' + f"{cr.Fore.CYAN}" + boisson.nom + '    ' +
-                      str(boisson.prix) + '€')
-                print(f"{cr.Fore.MAGENTA}" + "\033[3m" + boisson.composition)
-                print()
 
 
 #Permet la vérification de la saisie, qui appartient à la carte ou non
@@ -96,22 +68,18 @@ print(" Bonjour et bienvenus au réstaurant de Cyril et Luna!\n\n")
 #----------------------------------------
 print("Avez vous réservé ? : ")
 dl.addCmd(reserveOui("oui"))
-dl.addCmd(reserveNon("non"))
+dl.addCmd(reserveNon("non"))  # variable nb de personne
 dl.addCmd(reserveAutrejour("Nous voudrions réserver pour un autre jour"))
 dl.prt()
 
 # Aperitif
 #----------------------------------------
 print("Souhaitez vous un apéritif ?")
-rep = input()
-if rep == "oui":
-  afficherBoisson()
+dl.addCmd(AperitifOui("oui", laCarte))
+dl.addCmd(AperitifNon("non", laCarte))
+dl.prt()
 
 
-print("Voici la carte, je vous laisse réfléchir quelques instants.")
-time.sleep(3)
-afficherLaCarte()
-time.sleep(5)
 
 #BUG
 choix = input('Avez-vous choisi ? : ')
@@ -151,7 +119,17 @@ else:
 time.sleep(5)
 print('Voici votre ' + entree)
 time.sleep(10)
-print('Avez vous terminez?')
+# Boîte de dialogue
+dl.addCmd(ManqueSel("Sel"))
+dl.addCmd(ManqueEau("Eau"))
+dl.addCmd(ManquePain("Pain"))
+dl.addCmd(RenvoyerCuisine("Renvoyer le plat"))
+dl.addCmd(Rien("Tout va bien!"))
+dl.prt()
+
+
+
+print('Avez vous terminé?')
 finientree = input()
 while (finientree != "oui"):
     print('Je reviens dans un instant')
@@ -160,6 +138,12 @@ while (finientree != "oui"):
 print('je vous débarrasse et vous apporte votre plat tout de suite')
 time.sleep(3)
 print('voici votre ' + plat)
+dl.addCmd(ManqueSel("Sel"))
+dl.addCmd(ManqueEau("Eau"))
+dl.addCmd(ManquePain("Pain"))
+dl.addCmd(Rien("Tout va bien!"))
+dl.addCmd(RenvoyerCuisine("Renvoyer le plat"))
+dl.prt()
 time.sleep(10)
 print('Avez vous terminez?')
 finiplat = input()
@@ -177,6 +161,10 @@ if (dessertTrouve):
     print('Je vous apporte votre dessert tout de suite')
     time.sleep(3)
     print('voici votre ' + queldessert)
+    dl.addCmd(ManqueEau("Eau"))
+    dl.addCmd(RenvoyerCuisine("Renvoyer le dessert"))
+    dl.addCmd(Rien("Tout va bien!"))
+    dl.prt()
     time.sleep(3)
 
 print('Voici l\'addition')
