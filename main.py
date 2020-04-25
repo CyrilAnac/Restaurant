@@ -1,8 +1,10 @@
-from dialogs.commands import *
-from dialogs.Dialog import *
 
-from sheetsImport import platsCarte,boissonsCarte
+
+
+import dialogs.commands as cd
+from dialogs.Dialog import Dialog
 import time
+from sheetsImport import platsCarte,boissonsCarte
 import random
 import colorama as cr
 # Initialise colorama and make it so that the colours auto reset
@@ -43,7 +45,6 @@ def addition(listePlats):
 
     return prixTotal
 
-
 # DECLARATIONS
 #==============
 laCarte = []
@@ -61,27 +62,42 @@ print("|                                             |")
 print("|         Le Resto de Cyril et Luna <3        |")
 print("|                                             |")
 print("-----------------------------------------------")
-print(" Bonjour et bienvenus au réstaurant de Cyril et Luna!\n\n")
+print(" Bonjour et bienvenus au restaurant de Cyril et Luna!\n\n")
+
 
 
 # Reservation
 #----------------------------------------
 print("Avez vous réservé ? : ")
-dl.addCmd(reserveOui("oui"))
-dl.addCmd(reserveNon("non"))  # variable nb de personne
-dl.addCmd(reserveAutrejour("Nous voudrions réserver pour un autre jour"))
+dl.addCmd(cd.reserveOui("oui"))
+dl.addCmd(cd.reserveNon("non"))  # variable nb de personne
+dl.addCmd(cd.reserveAutrejour("Nous voudrions réserver pour un autre jour"))
 dl.prt()
 
 # Aperitif
 #----------------------------------------
 print("Souhaitez vous un apéritif ?")
-dl.addCmd(AperitifOui("oui", laCarte))
-dl.addCmd(AperitifNon("non", laCarte))
-dl.prt()
+dl.addCmd(cd.AperitifOui("oui", laCarte))
+dl.addCmd(cd.AperitifNon("non", laCarte))
+
+if dl.prt() : # Oui pour un aperitif
+        print('Avez-vous choisi ? : ')
+        dl.addCmd(cd.ChoixOui("Oui"))
+        dl.addCmd(cd.ChoixNon("Non pas encore", dl))
+        dl.prt()
+  
+
+#         choix = input('Avez-vous terminé ? : ')
+# #Tant que la réponse n'est pas oui, on repose la question
+#         while (choix != "oui"):
+#             print('Je reviens dans un instant')
+#             time.sleep(3)
+#             choix = input('Avez-vous terminé ? : ')
+#             print("Voici le menu, je vous laisse réfléchir")
+#             afficherLaCarte(self.carte)
 
 
 
-#BUG
 choix = input('Avez-vous choisi ? : ')
 #Tant que la réponse n'est pas oui, on repose la question
 while (choix != "oui"):
@@ -119,12 +135,14 @@ else:
 time.sleep(5)
 print('Voici votre ' + entree)
 time.sleep(10)
+
+
 # Boîte de dialogue
-dl.addCmd(ManqueSel("Sel"))
-dl.addCmd(ManqueEau("Eau"))
-dl.addCmd(ManquePain("Pain"))
-dl.addCmd(RenvoyerCuisine("Renvoyer le plat"))
-dl.addCmd(Rien("Tout va bien!"))
+dl.addCmd(cd.ManqueSel("Sel"))
+dl.addCmd(cd.ManqueEau("Eau"))
+dl.addCmd(cd.ManquePain("Pain"))
+dl.addCmd(cd.RenvoyerCuisine("Renvoyer le plat"))
+dl.addCmd(cd.Rien("Tout va bien!"))
 dl.prt()
 
 
@@ -138,11 +156,11 @@ while (finientree != "oui"):
 print('je vous débarrasse et vous apporte votre plat tout de suite')
 time.sleep(3)
 print('voici votre ' + plat)
-dl.addCmd(ManqueSel("Sel"))
-dl.addCmd(ManqueEau("Eau"))
-dl.addCmd(ManquePain("Pain"))
-dl.addCmd(Rien("Tout va bien!"))
-dl.addCmd(RenvoyerCuisine("Renvoyer le plat"))
+dl.addCmd(cd.ManqueSel("Sel"))
+dl.addCmd(cd.ManqueEau("Eau"))
+dl.addCmd(cd.ManquePain("Pain"))
+dl.addCmd(cd.Rien("Tout va bien!"))
+dl.addCmd(cd.RenvoyerCuisine("Renvoyer le plat"))
 dl.prt()
 time.sleep(10)
 print('Avez vous terminez?')
@@ -161,9 +179,9 @@ if (dessertTrouve):
     print('Je vous apporte votre dessert tout de suite')
     time.sleep(3)
     print('voici votre ' + queldessert)
-    dl.addCmd(ManqueEau("Eau"))
-    dl.addCmd(RenvoyerCuisine("Renvoyer le dessert"))
-    dl.addCmd(Rien("Tout va bien!"))
+    dl.addCmd(cd.ManqueEau("Eau"))
+    dl.addCmd(cd.RenvoyerCuisine("Renvoyer le dessert"))
+    dl.addCmd(cd.Rien("Tout va bien!"))
     dl.prt()
     time.sleep(3)
 

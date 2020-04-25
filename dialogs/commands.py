@@ -1,13 +1,6 @@
 
-from classes import Command
 import time
-
-from dialogs.commands import *
-from dialogs.Dialog import *
-
 from sheetsImport import platsCarte,boissonsCarte
-import time
-import random
 import colorama as cr
 # Initialise colorama and make it so that the colours auto reset
 cr.init(autoreset=True)
@@ -99,30 +92,34 @@ class AperitifOui:
       time.sleep (3)
       afficherBoisson(self.carte)
       time.sleep (5)
-      choix = input('Avez-vous choisi ? : ')
-#Tant que la réponse n'est pas oui, on repose la question
-      while (choix != "oui"):
-       print('Je reviens dans un instant')
-       time.sleep(3)
-       choix = input('Avez-vous choisi ? : ')
 
-      boisson = input("Que désirez vous boire ?\n")
-      print('Je vous apporte votre' + boisson)
-      time.sleep(3)
-      print ('Voici votre' + boisson)
-      time.sleep(5)
-      choix = input('Avez-vous terminé ? : ')
-#Tant que la réponse n'est pas oui, on repose la question
-      while (choix != "oui"):
-       print('Je reviens dans un instant')
-       time.sleep(3)
-       choix = input('Avez-vous terminé ? : ')
-      print("Voici le menu, je vous laisse réfléchir")
-      afficherLaCarte(self.carte)
+      return True 
+      
+class ChoixNon :
+    def __init__(self, title, dialog) :
+        self.title = title  
+        self.dialog = dialog      
 
+    def action(self) :
+        print('Je reviens dans un instant')
+        time.sleep(3)      
+        print('Avez vous fait votre choix?')
+        self.dialog.addCmd(ChoixOui("Oui"))
+        self.dialog.addCmd(ChoixNon("Non pas encore", self.dialog))
+        self.dialog.prt()
 
+class ChoixOui :
+    def __init__(self, title) :
+        self.title = title             
     
-
+    def action(self) :
+        boisson = input("Que désirez vous boire ?\n")
+        print('Je vous apporte votre' + boisson)
+        time.sleep(3)
+        print ('Voici votre' + boisson)
+        time.sleep(5)
+        
+  
 class AperitifNon:
    def __init__(self, title, carte) :
        self.title = title 
@@ -181,12 +178,12 @@ class RenvoyerCuisine:
       print("Voici votre nouveau plat, bon appétit!")
       time.sleep(5)
 
-class Rien:
-    def __init__(self, title) :
-        self.title = title
+# class Rien:
+#     def __init__(self, title) :
+#         self.title = title
     
-    def action(self) :
-      print()
+#     def action(self) :
+#       print()
 
 
 
