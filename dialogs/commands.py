@@ -5,6 +5,24 @@ import colorama as cr
 # Initialise colorama and make it so that the colours auto reset
 cr.init(autoreset=True)
 
+
+#Permet la vérification de la saisie, qui appartient à la carte ou non
+def verificationPlat(saisie, carte):
+    trouve = False
+
+    # Boucle sur tout les noms de plats
+    for plat in carte:
+        if saisie == plat.nom:
+            platPris = plat.nom
+            trouve = True
+
+    if trouve:
+        print(platPris + ", c'est noté")
+    else:
+        print('Désolé,ce plat n\'existe pas!')
+    return trouve
+
+
 # Permet l'affichage complet de la carte
 def afficherLaCarte(carte):
     for cat in platsCarte.categories:
@@ -96,27 +114,30 @@ class AperitifOui:
       return True 
       
 class ChoixNon :
-    def __init__(self, title, dialog) :
+    def __init__(self, title, dialog, carte) :
         self.title = title  
-        self.dialog = dialog      
+        self.dialog = dialog 
+        self.carte = carte     
 
     def action(self) :
         print('Je reviens dans un instant')
         time.sleep(3)      
         print('Avez vous fait votre choix?')
-        self.dialog.addCmd(ChoixOui("Oui"))
+        self.dialog.addCmd(ChoixOui("Oui", self.carte))
         self.dialog.addCmd(ChoixNon("Non pas encore", self.dialog))
         self.dialog.prt()
 
 class ChoixOui :
-    def __init__(self, title) :
-        self.title = title             
+    def __init__(self, title, carte) :
+        self.title = title 
+        self.carte = carte            
     
     def action(self) :
         boisson = input("Que désirez vous boire ?\n")
-        print('Je vous apporte votre' + boisson)
+        verificationPlat(boisson, self.carte)
+        print('Je vous apporte votre ' + boisson)
         time.sleep(3)
-        print ('Voici votre' + boisson)
+        print ('Voici votre ' + boisson)
         time.sleep(5)
         
   

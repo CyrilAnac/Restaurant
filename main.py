@@ -1,7 +1,4 @@
-
-
-
-import dialogs.commands as cd
+import dialogs.commands as cmd
 from dialogs.Dialog import Dialog
 import time
 from sheetsImport import platsCarte,boissonsCarte
@@ -69,125 +66,132 @@ print(" Bonjour et bienvenus au restaurant de Cyril et Luna!\n\n")
 # Reservation
 #----------------------------------------
 print("Avez vous réservé ? : ")
-dl.addCmd(cd.reserveOui("oui"))
-dl.addCmd(cd.reserveNon("non"))  # variable nb de personne
-dl.addCmd(cd.reserveAutrejour("Nous voudrions réserver pour un autre jour"))
+dl.addCmd(cmd.reserveOui("oui"))
+dl.addCmd(cmd.reserveNon("non"))  
+dl.addCmd(cmd.reserveAutrejour("Nous voudrions réserver pour un autre jour"))
 dl.prt()
 
 # Aperitif
 #----------------------------------------
 print("Souhaitez vous un apéritif ?")
-dl.addCmd(cd.AperitifOui("oui", laCarte))
-dl.addCmd(cd.AperitifNon("non", laCarte))
+dl.addCmd(cmd.AperitifOui("oui", laCarte))
+dl.addCmd(cmd.AperitifNon("non", laCarte))
 
 if dl.prt() : # Oui pour un aperitif
         print('Avez-vous choisi ? : ')
-        dl.addCmd(cd.ChoixOui("Oui"))
-        dl.addCmd(cd.ChoixNon("Non pas encore", dl))
+        dl.addCmd(cmd.ChoixOui("Oui",laCarte))
+        dl.addCmd(cmd.ChoixNon("Non pas encore", dl, laCarte))
         dl.prt()
-  
 
-#         choix = input('Avez-vous terminé ? : ')
+
+# Repas
+#----------------------------------------
+print("Voici la carte du jour :")
+cmd.afficherLaCarte(laCarte)
+print("Avez vous fait votre choix ?")
+# TODO
+# cmd choixMenuOui
+# cmd choixMenuNon
+
+print("Que desirez vous ?")
+# fct saisie repas
+print("Autre chose ?")
+# cmd saisieOui
+# cmd saisieNon
+
+print("C'est noté, je vous apporte ca")
+print("voila au revoir!")
+
+# choix = input('Avez-vous choisi ? : ')
 # #Tant que la réponse n'est pas oui, on repose la question
-#         while (choix != "oui"):
-#             print('Je reviens dans un instant')
-#             time.sleep(3)
-#             choix = input('Avez-vous terminé ? : ')
-#             print("Voici le menu, je vous laisse réfléchir")
-#             afficherLaCarte(self.carte)
+# while (choix != "oui"):
+#     print('Je reviens dans un instant')
+#     time.sleep(3)
+#     choix = input('Avez-vous choisi ? : ')
+
+# #Tant que la réponse n'est pas dans la carte, on redemande ce qu'il veut en entrée
+# entree = input("Que désirez vous en entrée ?\n")
+# while (not verificationPlat(entree)):
+#     entree = input('Que désirez vous en entrée ?\n')
+
+# plat = platPris(entree)
+# platsCommandes.append(plat)
+
+# print("En plat principal?")
+# plat = input()
+# while (not verificationPlat(plat)):
+#     plat = input('Que désirez vous en plat')
+# platsCommandes.append(platPris(plat))
+
+# print("Un déssert ? ")
+# dessert = input()
+# if dessert == "oui":
+#     print('lequel?')
+#     queldessert = input()
+#     while (not verificationPlat(queldessert)):
+#         queldessert = input('Que désirez vous en dessert')
+#     platsCommandes.append(platPris(queldessert))
+#     print(' très bien ')
+
+# else:
+#     print('c\'est noté, je vous apporte ça!')
+
+# time.sleep(5)
+# print('Voici votre ' + entree)
+# time.sleep(10)
+
+
+# # Boîte de dialogue
+# dl.addCmd(cmd.ManqueSel("Sel"))
+# dl.addCmd(cmd.ManqueEau("Eau"))
+# dl.addCmd(cmd.ManquePain("Pain"))
+# dl.addCmd(cmd.RenvoyerCuisine("Renvoyer le plat"))
+# dl.addCmd(cmd.Rien("Tout va bien!"))
+# dl.prt()
 
 
 
-choix = input('Avez-vous choisi ? : ')
-#Tant que la réponse n'est pas oui, on repose la question
-while (choix != "oui"):
-    print('Je reviens dans un instant')
-    time.sleep(3)
-    choix = input('Avez-vous choisi ? : ')
+# print('Avez vous terminé?')
+# finientree = input()
+# while (finientree != "oui"):
+#     print('Je reviens dans un instant')
+#     time.sleep(5)
+#     finientree = input('Avez vous terminé?')
+# print('je vous débarrasse et vous apporte votre plat tout de suite')
+# time.sleep(3)
+# print('voici votre ' + plat)
+# dl.addCmd(cmd.ManqueSel("Sel"))
+# dl.addCmd(cmd.ManqueEau("Eau"))
+# dl.addCmd(cmd.ManquePain("Pain"))
+# dl.addCmd(cmd.Rien("Tout va bien!"))
+# dl.addCmd(cmd.RenvoyerCuisine("Renvoyer le plat"))
+# dl.prt()
+# time.sleep(10)
+# print('Avez vous terminez?')
+# finiplat = input()
+# while (finiplat != "oui"):
+#     print('Je reviens dans un instant')
+#     time.sleep(5)
+#     finiplat = input('Avez vous terminé?')
 
-#Tant que la réponse n'est pas dans la carte, on redemande ce qu'il veut en entrée
-entree = input("Que désirez vous en entrée ?\n")
-while (not verificationPlat(entree)):
-    entree = input('Que désirez vous en entrée ?\n')
+# dessertTrouve = False
+# for plat in platsCommandes:
+#     if plat.categorie == "Dessert":
+#         dessertTrouve = True
 
-plat = platPris(entree)
-platsCommandes.append(plat)
+# if (dessertTrouve):
+#     print('Je vous apporte votre dessert tout de suite')
+#     time.sleep(3)
+#     print('voici votre ' + queldessert)
+#     dl.addCmd(cmd.ManqueEau("Eau"))
+#     dl.addCmd(cmd.RenvoyerCuisine("Renvoyer le dessert"))
+#     dl.addCmd(cmd.Rien("Tout va bien!"))
+#     dl.prt()
+#     time.sleep(3)
 
-print("En plat principal?")
-plat = input()
-while (not verificationPlat(plat)):
-    plat = input('Que désirez vous en plat')
-platsCommandes.append(platPris(plat))
-
-print("Un déssert ? ")
-dessert = input()
-if dessert == "oui":
-    print('lequel?')
-    queldessert = input()
-    while (not verificationPlat(queldessert)):
-        queldessert = input('Que désirez vous en dessert')
-    platsCommandes.append(platPris(queldessert))
-    print(' très bien ')
-
-else:
-    print('c\'est noté, je vous apporte ça!')
-
-time.sleep(5)
-print('Voici votre ' + entree)
-time.sleep(10)
-
-
-# Boîte de dialogue
-dl.addCmd(cd.ManqueSel("Sel"))
-dl.addCmd(cd.ManqueEau("Eau"))
-dl.addCmd(cd.ManquePain("Pain"))
-dl.addCmd(cd.RenvoyerCuisine("Renvoyer le plat"))
-dl.addCmd(cd.Rien("Tout va bien!"))
-dl.prt()
-
-
-
-print('Avez vous terminé?')
-finientree = input()
-while (finientree != "oui"):
-    print('Je reviens dans un instant')
-    time.sleep(5)
-    finientree = input('Avez vous terminé?')
-print('je vous débarrasse et vous apporte votre plat tout de suite')
-time.sleep(3)
-print('voici votre ' + plat)
-dl.addCmd(cd.ManqueSel("Sel"))
-dl.addCmd(cd.ManqueEau("Eau"))
-dl.addCmd(cd.ManquePain("Pain"))
-dl.addCmd(cd.Rien("Tout va bien!"))
-dl.addCmd(cd.RenvoyerCuisine("Renvoyer le plat"))
-dl.prt()
-time.sleep(10)
-print('Avez vous terminez?')
-finiplat = input()
-while (finiplat != "oui"):
-    print('Je reviens dans un instant')
-    time.sleep(5)
-    finiplat = input('Avez vous terminé?')
-
-dessertTrouve = False
-for plat in platsCommandes:
-    if plat.categorie == "Dessert":
-        dessertTrouve = True
-
-if (dessertTrouve):
-    print('Je vous apporte votre dessert tout de suite')
-    time.sleep(3)
-    print('voici votre ' + queldessert)
-    dl.addCmd(cd.ManqueEau("Eau"))
-    dl.addCmd(cd.RenvoyerCuisine("Renvoyer le dessert"))
-    dl.addCmd(cd.Rien("Tout va bien!"))
-    dl.prt()
-    time.sleep(3)
-
-print('Voici l\'addition')
-prix = addition(platsCommandes)
-print("cela vous coutera " + str(prix) + " euros")
+# print('Voici l\'addition')
+# prix = addition(platsCommandes)
+# print("cela vous coutera " + str(prix) + " euros")
 
 # TODO
 #==================================
