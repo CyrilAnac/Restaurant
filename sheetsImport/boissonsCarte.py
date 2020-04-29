@@ -1,3 +1,7 @@
+"""
+Comment test
+"""
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -17,8 +21,11 @@ sheet = client.open("Carte du restaurant").worksheet("Boissons")
 
 categories = ["ALCOOLS","SOFT","BOISSONS CHAUDES", "COCKTAIL APERITIF"]
 
-#Création des plats et ajouts à la carte
+
 def ajoutBoisson(carte) :
+  """Ajout des boissons
+  Ajout des boissons a la carte
+  """
   
   list_nom = sheet.col_values(1)
   list_compo = sheet.col_values(2)

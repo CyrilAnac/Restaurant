@@ -7,11 +7,10 @@ import colorama as cr
 # Initialise colorama and make it so that the colours auto reset
 cr.init(autoreset=True)
 
-
-
-
-#Permet la vérification de la saisie, qui appartient à la carte ou non
 def verificationPlat(saisie):
+    """
+    Permet la vérification de la saisie, qui appartient à la carte ou non
+    """
     trouve = False
 
     # Boucle sur tout les noms de plats
@@ -60,7 +59,6 @@ print("|         Le Resto de Cyril et Luna <3        |")
 print("|                                             |")
 print("-----------------------------------------------")
 print(" Bonjour et bienvenus au restaurant de Cyril et Luna!\n\n")
-
 
 
 # Reservation
